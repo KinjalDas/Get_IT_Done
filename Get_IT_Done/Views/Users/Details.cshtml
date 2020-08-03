@@ -1,0 +1,19 @@
+﻿@model Get_IT_Done.Models.Users
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>User Details</h2>
+<div class="card" style="width: 18rem;">
+    <div class="card-body">
+        <h2 class="card-title">User Details</h2>
+        <p class="card-text">User ID : @Model.UserID</p>
+        <p class="card-text">User Name : @Model.UserName</p>
+        @if (@Model.DateOfBirth.HasValue)
+        {
+        <p class="card-text">User DOB : @Model.DateOfBirth.ToString()</p>
+        }
+    </div>
+</div>
+

@@ -1,0 +1,26 @@
+﻿@model Get_IT_Done.ViewModels.UsersList
+@{
+    ViewBag.Title = "Users List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Users</h2>
+
+<table class="table table-dark">
+    <thead>
+        <tr>
+            <th scope="col">User</th>
+            <th scope="col">Membership Type</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var User in Model.usersList)
+        {
+           <tr>
+               <td>@Html.ActionLink(@User.UserName,"Details","Users",new { UserID = @User.UserID },null)</td>
+               <td>@User.MembershipType.TypeName</td>
+           </tr>
+        }
+    </tbody>
+</table>
+
