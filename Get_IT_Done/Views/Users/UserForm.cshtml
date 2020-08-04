@@ -11,10 +11,11 @@
     <div class="form-group">
         @Html.LabelFor(m => m.Users.UserName)
         @Html.TextBoxFor(m => m.Users.UserName, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Users.UserName)
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Users.DateOfBirth)
-        @if (Model.Users != null)
+        @if ((Model.Users != null) && (Model.Users.Id != Guid.Empty))
         {
             @Html.TextBoxFor(m => m.Users.DateOfBirth, "{0:yyyy-MM-dd}", new { @value = Model.Users.DateOfBirth.ToString(), @type = "date", @class = "form-control" })
         }
@@ -22,10 +23,11 @@
         {
             @Html.TextBoxFor(m => m.Users.DateOfBirth, "{0:MM/dd/yyyy}", new { @type = "date", @class = "form-control" })
         }
+        @Html.ValidationMessageFor(m => m.Users.DateOfBirth)
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Users.MembershipTypeId)
-        @if (Model.Users != null)
+        @if ((Model.Users != null) && (Model.Users.Id != Guid.Empty))
         {
             @Html.DropDownListFor(m => m.Users.MembershipTypeId, new SelectList(Model.MembershipTypes, "Id", "TypeName", Model.Users.MembershipTypeId), new { @class = "form-control" })
         }
@@ -33,13 +35,14 @@
         {
             @Html.DropDownListFor(m => m.Users.MembershipTypeId, new SelectList(Model.MembershipTypes, "Id", "TypeName"), "Please Select a Membership Plan", new { @class = "form-control" })
         }
+        @Html.ValidationMessageFor(m => m.Users.MembershipTypeId)
     </div>
     @Html.HiddenFor(m => m.Users.Id)
     <button type="reset" class="btn btn-warning">Reset</button>
     <button type="submit" class="btn btn-primary">Submit</button>
 }
 <br/>
-@if (Model.Users != null)
+@if ((Model.Users != null) && (Model.Users.Id != Guid.Empty))
 {
     using (Html.BeginForm("DeleteUser", "Users"))
     {
