@@ -83,7 +83,7 @@ namespace Get_IT_Done.Controllers
         [HttpPost]
         public ActionResult UserFormSubmit(Users Users)
         {
-            Users.MembershipType = _context.MembershipTypes.Single(m => m.Id == Users.MembershipTypeId);
+            //Users.MembershipType = _context.MembershipTypes.Single(m => m.Id == Users.MembershipTypeId);
             if(Users.Id == Guid.Empty)
             {
                 _context.Users.Add(Users);
