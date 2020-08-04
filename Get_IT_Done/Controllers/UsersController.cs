@@ -36,8 +36,67 @@ namespace Get_IT_Done.Controllers
         // GET:Users/Detail/{UserID}
         public ActionResult Details(Guid UserID)
         {
-            var User = _context.Users.Where(m => m.UserID == UserID).FirstOrDefault();
-            return View(User);
+            var user = _context.Users.Where(m => m.Id == UserID).FirstOrDefault();
+            var membershipType = _context.MembershipTypes.Single(m => m.Id == user.MembershipTypeId);
+            var userDetails = new UserDetails
+            {
+                User = user,
+                MembershipType = membershipType
+            };
+            return View(userDetails);
+        }
+
+        // GET:Users/AddUser
+        public ActionResult AddUser()
+        {
+            var membershipTypes = _context.MembershipTypes.ToList();
+            UserForm form = new UserForm {
+                MembershipTypes = membershipTypes
+            };
+            return View("UserForm",form);
+        }
+
+        // GET:Users/EditUser/{UserID}
+        public ActionResult EditUser(Guid UserID)
+        {
+            var User = _context.Users.Single(m => m.Id == UserID);
+            var membershipTypes = _context.MembershipTypes.ToList();
+            UserForm form = new UserForm
+            {
+                Users = User,
+                MembershipTypes = membershipTypes
+            };
+            return View("UserForm",form);
+        }
+
+        // POST:Users/DeleteUser
+        [HttpPost]
+        public ActionResult DeleteUser(Users Users)
+        {
+            var User = _context.Users.Single(m => m.Id == Users.Id);
+            _context.Users.Remove(User);
+            _context.SaveChanges();
+            return RedirectToAction("Index", "Users");
+        }
+
+        // POST:Users/UserFormSubmit
+        [HttpPost]
+        public ActionResult UserFormSubmit(Users Users)
+        {
+            Users.MembershipType = _context.MembershipTypes.Single(m => m.Id == Users.MembershipTypeId);
+            if(Users.Id == Guid.Empty)
+            {
+                _context.Users.Add(Users);
+            } else
+            {
+                var User = _context.Users.Single(m => m.Id == Users.Id);
+                User.DateOfBirth = Users.DateOfBirth;
+                User.MembershipType = Users.MembershipType;
+                User.MembershipTypeId = Users.MembershipTypeId;
+                User.UserName = Users.UserName;
+            }
+            _context.SaveChanges();
+            return RedirectToAction("Index", "Users");
         }
     }
 }

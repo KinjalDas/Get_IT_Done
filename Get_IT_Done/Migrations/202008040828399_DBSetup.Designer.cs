@@ -7,13 +7,13 @@ namespace Get_IT_Done.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class AddMembershipType : IMigrationMetadata
+    public sealed partial class DBSetup : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddMembershipType));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(DBSetup));
         
         string IMigrationMetadata.Id
         {
-            get { return "202008031048490_AddMembershipType"; }
+            get { return "202008040828399_DBSetup"; }
         }
         
         string IMigrationMetadata.Source

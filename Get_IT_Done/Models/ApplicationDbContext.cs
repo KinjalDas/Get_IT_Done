@@ -11,6 +11,7 @@ namespace Get_IT_Done.Models
     {
         public DbSet<Users> Users { get; set; }
         public DbSet<Tasks> Tasks { get; set; }
+        public DbSet<MembershipType> MembershipTypes { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
