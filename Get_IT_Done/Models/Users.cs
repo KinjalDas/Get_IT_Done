@@ -20,10 +20,10 @@ namespace Get_IT_Done.Models
         [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime? DateOfBirth { get; set; }
 
-        [Display(Name = "Desired Membership Plan")]
         public MembershipType MembershipType { get; set; }
 
         [Required]
+        [Display(Name = "Desired Membership Plan")]
         public int MembershipTypeId { get; set; }
     }
 }

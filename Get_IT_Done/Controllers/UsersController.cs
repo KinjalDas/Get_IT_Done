@@ -84,6 +84,16 @@ namespace Get_IT_Done.Controllers
         public ActionResult UserFormSubmit(Users Users)
         {
             //Users.MembershipType = _context.MembershipTypes.Single(m => m.Id == Users.MembershipTypeId);
+            if (!ModelState.IsValid)
+            {
+                var userForm = new UserForm
+                {
+                    Users = Users,
+                    MembershipTypes = _context.MembershipTypes.ToList()
+                };
+                return View("UserForm", userForm);
+            }
+
             if(Users.Id == Guid.Empty)
             {
                 _context.Users.Add(Users);
