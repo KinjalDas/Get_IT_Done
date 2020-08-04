@@ -17,7 +17,7 @@
         @foreach (var User in Model.usersList)
         {
            <tr>
-               <td>@Html.ActionLink(@User.UserName,"Details","Users",new { UserID = @User.UserID },null)</td>
+               <td>@Html.ActionLink(@User.UserName,"EditUser","Users",new { UserID = @User.Id },null)</td>
                <td>@User.MembershipType.TypeName</td>
            </tr>
         }

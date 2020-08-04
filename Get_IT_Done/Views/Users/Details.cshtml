@@ -1,4 +1,4 @@
-﻿@model Get_IT_Done.Models.Users
+﻿@model Get_IT_Done.ViewModels.UserDetails
 @{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -7,13 +7,14 @@
 <h2>User Details</h2>
 <div class="card" style="width: 18rem;">
     <div class="card-body">
-        <h2 class="card-title">User Details</h2>
-        <p class="card-text">User ID : @Model.UserID</p>
-        <p class="card-text">User Name : @Model.UserName</p>
-        @if (@Model.DateOfBirth.HasValue)
+        <h2 class="card-title">User</h2>
+        <p class="card-text">User ID : @Model.User.Id</p>
+        <p class="card-text">User Name : @Model.User.UserName</p>
+        @if (@Model.User.DateOfBirth.HasValue)
         {
-        <p class="card-text">User DOB : @Model.DateOfBirth.ToString()</p>
+            <p class="card-text">User DOB : @Html.DisplayFor(m => m.User.DateOfBirth)</p>
         }
+        <p class="card-text">Membership Plan : @Model.MembershipType.TypeName</p>
     </div>
 </div>
 

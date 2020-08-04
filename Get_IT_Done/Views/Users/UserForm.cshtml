@@ -1,0 +1,49 @@
+﻿@model Get_IT_Done.ViewModels.UserForm
+@{
+    ViewBag.Title = "AddUser";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Create User</h2>
+
+@using (Html.BeginForm("UserFormSubmit", "Users"))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.Users.UserName)
+        @Html.TextBoxFor(m => m.Users.UserName, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Users.DateOfBirth)
+        @if (Model.Users != null)
+        {
+            @Html.TextBoxFor(m => m.Users.DateOfBirth, "{0:yyyy-MM-dd}", new { @value = Model.Users.DateOfBirth.ToString(), @type = "date", @class = "form-control" })
+        }
+        else
+        {
+            @Html.TextBoxFor(m => m.Users.DateOfBirth, "{0:MM/dd/yyyy}", new { @type = "date", @class = "form-control" })
+        }
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Users.MembershipTypeId)
+        @if (Model.Users != null)
+        {
+            @Html.DropDownListFor(m => m.Users.MembershipTypeId, new SelectList(Model.MembershipTypes, "Id", "TypeName", Model.Users.MembershipTypeId), new { @class = "form-control" })
+        }
+        else
+        {
+            @Html.DropDownListFor(m => m.Users.MembershipTypeId, new SelectList(Model.MembershipTypes, "Id", "TypeName"), "Please Select a Membership Plan", new { @class = "form-control" })
+        }
+    </div>
+    @Html.HiddenFor(m => m.Users.Id)
+    <button type="reset" class="btn btn-warning">Reset</button>
+    <button type="submit" class="btn btn-primary">Submit</button>
+}
+<br/>
+@if (Model.Users != null)
+{
+    using (Html.BeginForm("DeleteUser", "Users"))
+    {
+        @Html.HiddenFor(m => m.Users.Id)
+        <button type="submit" class="btn btn-danger">Delete</button>
+    }
+}

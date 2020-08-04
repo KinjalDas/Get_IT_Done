@@ -7,13 +7,13 @@ namespace Get_IT_Done.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class InitialDBConfig : IMigrationMetadata
+    public sealed partial class AddMembershipTypesDBSeed : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialDBConfig));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(AddMembershipTypesDBSeed));
         
         string IMigrationMetadata.Id
         {
-            get { return "202008031033372_InitialDBConfig"; }
+            get { return "202008040829221_AddMembershipTypesDBSeed"; }
         }
         
         string IMigrationMetadata.Source
