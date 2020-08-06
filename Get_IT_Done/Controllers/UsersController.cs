@@ -50,7 +50,8 @@ namespace Get_IT_Done.Controllers
         public ActionResult AddUser()
         {
             var membershipTypes = _context.MembershipTypes.ToList();
-            UserForm form = new UserForm {
+            UserForm form = new UserForm
+            {
                 MembershipTypes = membershipTypes
             };
             return View("UserForm",form);
@@ -61,9 +62,8 @@ namespace Get_IT_Done.Controllers
         {
             var User = _context.Users.Single(m => m.Id == UserID);
             var membershipTypes = _context.MembershipTypes.ToList();
-            UserForm form = new UserForm
+            UserForm form = new UserForm(User)
             {
-                Users = User,
                 MembershipTypes = membershipTypes
             };
             return View("UserForm",form);
@@ -71,6 +71,7 @@ namespace Get_IT_Done.Controllers
 
         // POST:Users/DeleteUser
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult DeleteUser(Users Users)
         {
             var User = _context.Users.Single(m => m.Id == Users.Id);
@@ -81,14 +82,14 @@ namespace Get_IT_Done.Controllers
 
         // POST:Users/UserFormSubmit
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult UserFormSubmit(Users Users)
         {
             //Users.MembershipType = _context.MembershipTypes.Single(m => m.Id == Users.MembershipTypeId);
             if (!ModelState.IsValid)
             {
-                var userForm = new UserForm
+                var userForm = new UserForm(Users)
                 {
-                    Users = Users,
                     MembershipTypes = _context.MembershipTypes.ToList()
                 };
                 return View("UserForm", userForm);
