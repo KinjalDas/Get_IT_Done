@@ -13,6 +13,8 @@ namespace Get_IT_Done.ViewModels
 
         public Guid Id { get; set; }
 
+        public string Title { get; set; }
+
         [Required]
         [Display(Name = "User Name")]
         public string UserName { get; set; }
@@ -31,11 +33,13 @@ namespace Get_IT_Done.ViewModels
         public UserForm()
         {
             Id = Guid.Empty;
+            Title = "Created User";
         }
 
         public UserForm(Users User)
         {
             Id = User.Id;
+            Title = "Edit User";
             UserName = User.UserName;
             DateOfBirth = User.DateOfBirth;
             MembershipTypeId = User.MembershipTypeId;
