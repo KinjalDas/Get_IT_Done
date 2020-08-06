@@ -4,49 +4,58 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Create User</h2>
+<h2>@Model.Title</h2>
+
+<br/>
 
 @using (Html.BeginForm("UserFormSubmit", "Users"))
 {
+    @Html.ValidationSummary(true, "Please fix the highlighted errors in the form!")
     <div class="form-group">
-        @Html.LabelFor(m => m.Users.UserName)
-        @Html.TextBoxFor(m => m.Users.UserName, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.Users.UserName)
+        @Html.LabelFor(m => m.UserName)
+        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.UserName)
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.Users.DateOfBirth)
-        @if ((Model.Users != null) && (Model.Users.Id != Guid.Empty))
+        @Html.LabelFor(m => m.DateOfBirth)
+        @if (Model.Id != Guid.Empty)
         {
-            @Html.TextBoxFor(m => m.Users.DateOfBirth, "{0:yyyy-MM-dd}", new { @value = Model.Users.DateOfBirth.ToString(), @type = "date", @class = "form-control" })
+            @Html.TextBoxFor(m => m.DateOfBirth, "{0:yyyy-MM-dd}", new { @value = Model.DateOfBirth.ToString(), @type = "date", @class = "form-control" })
         }
         else
         {
-            @Html.TextBoxFor(m => m.Users.DateOfBirth, "{0:MM/dd/yyyy}", new { @type = "date", @class = "form-control" })
+            @Html.TextBoxFor(m => m.DateOfBirth, "{0:MM/dd/yyyy}", new { @type = "date", @class = "form-control" })
         }
-        @Html.ValidationMessageFor(m => m.Users.DateOfBirth)
+        @Html.ValidationMessageFor(m => m.DateOfBirth)
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.Users.MembershipTypeId)
-        @if ((Model.Users != null) && (Model.Users.Id != Guid.Empty))
+        @Html.LabelFor(m => m.MembershipTypeId)
+        @if (Model.Id != Guid.Empty)
         {
-            @Html.DropDownListFor(m => m.Users.MembershipTypeId, new SelectList(Model.MembershipTypes, "Id", "TypeName", Model.Users.MembershipTypeId), new { @class = "form-control" })
+            @Html.DropDownListFor(m => m.MembershipTypeId, new SelectList(Model.MembershipTypes, "Id", "TypeName", Model.MembershipTypeId), new { @class = "form-control" })
         }
         else
         {
-            @Html.DropDownListFor(m => m.Users.MembershipTypeId, new SelectList(Model.MembershipTypes, "Id", "TypeName"), "Please Select a Membership Plan", new { @class = "form-control" })
+            @Html.DropDownListFor(m => m.MembershipTypeId, new SelectList(Model.MembershipTypes, "Id", "TypeName"), "Please Select a Membership Plan", new { @class = "form-control" })
         }
-        @Html.ValidationMessageFor(m => m.Users.MembershipTypeId)
+        @Html.ValidationMessageFor(m => m.MembershipTypeId)
     </div>
-    @Html.HiddenFor(m => m.Users.Id)
+    @Html.HiddenFor(m => m.Id)
+    @Html.AntiForgeryToken()
     <button type="reset" class="btn btn-warning">Reset</button>
     <button type="submit" class="btn btn-primary">Submit</button>
 }
-<br/>
-@if ((Model.Users != null) && (Model.Users.Id != Guid.Empty))
+<br />
+@if (Model.Id != Guid.Empty)
 {
     using (Html.BeginForm("DeleteUser", "Users"))
     {
-        @Html.HiddenFor(m => m.Users.Id)
+        @Html.HiddenFor(m => m.Id)
+        @Html.AntiForgeryToken()
         <button type="submit" class="btn btn-danger">Delete</button>
     }
+}
+
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval")
 }

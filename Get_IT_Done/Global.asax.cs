@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Get_IT_Done.DTOs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -13,6 +14,7 @@ namespace Get_IT_Done
     {
         protected void Application_Start()
         {
+            DTOMapper.InitializeMapper();
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);

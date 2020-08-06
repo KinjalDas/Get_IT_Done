@@ -13,17 +13,14 @@ namespace Get_IT_Done.Models
         public Guid Id { get; set; }
 
         [Required]
-        [Display(Name = "User Name")]
         public string UserName { get; set; }
 
-        [Display(Name = "Date of Birth")]
         [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime? DateOfBirth { get; set; }
 
         public MembershipType MembershipType { get; set; }
 
         [Required]
-        [Display(Name = "Desired Membership Plan")]
         public int MembershipTypeId { get; set; }
     }
 }
