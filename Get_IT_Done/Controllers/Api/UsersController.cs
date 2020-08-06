@@ -72,7 +72,7 @@ namespace Get_IT_Done.Controllers.Api
                 }
             }
 
-            return StatusCode(HttpStatusCode.NoContent);
+            return Ok(usersDTO);
         }
 
         // POST: api/Users
